@@ -1,0 +1,19 @@
+# Ignorar entorno virtual y cachés
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignorar archivos binarios
+*.pyd
+*.dll
+*.so
+*.exe
+
+# Ignorar archivos temporales
+*.log
+*.tmp
+
+# Ignorar todo lo .keras EXCEPTO el modelo
+*.keras
+!modelo_comidas.keras
