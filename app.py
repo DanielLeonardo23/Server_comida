@@ -7,8 +7,7 @@ import os
 
 app = Flask(__name__)
 
-# Carga del modelo (ajustado para carpeta "modelo/")
-model = tf.keras.models.load_model("modelo/modelo_comidas.keras")
+model = tf.keras.models.load_model("modelo_comidas.keras")
 
 IMG_SIZE = (224, 224)
 
