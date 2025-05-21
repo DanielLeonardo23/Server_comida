@@ -6,10 +6,22 @@ from PIL import Image
 import os
 
 app = Flask(__name__)
-model = tf.keras.models.load_model("modelo_comidas.keras")
+
+# Carga del modelo (ajustado para carpeta "modelo/")
+model = tf.keras.models.load_model("modelo/modelo_comidas.keras")
+
 IMG_SIZE = (224, 224)
 
-CLASS_NAMES = ['aguadito_de_pollo', 'arroz_chaufa_de_pollo', 'choclo_con_queso', 'papa_a_la_huancaina', 'pollo_a_la_brasa_con_papas_fritas', 'pollo_broaster_con_papas_fritas', 'tallarines_rojos_con_pollo', 'tallarines_saltados_con_pollo', 'tallarines_verdes_con_bistec', 'aji_de_gallina_peruano', 'anticuchos_peruanos', 'arroz_con_pollo_peruano', 'carapulcra', 'causa_limena', 'ceviche_peruano', 'juane', 'lomo_saltado_peruano', 'pachamanca', 'sopa_seca_chinchana']
+CLASS_NAMES = [
+    'aguadito_de_pollo', 'arroz_chaufa_de_pollo', 'choclo_con_queso',
+    'papa_a_la_huancaina', 'pollo_a_la_brasa_con_papas_fritas',
+    'pollo_broaster_con_papas_fritas', 'tallarines_rojos_con_pollo',
+    'tallarines_saltados_con_pollo', 'tallarines_verdes_con_bistec',
+    'aji_de_gallina_peruano', 'anticuchos_peruanos',
+    'arroz_con_pollo_peruano', 'carapulcra', 'causa_limena',
+    'ceviche_peruano', 'juane', 'lomo_saltado_peruano', 'pachamanca',
+    'sopa_seca_chinchana'
+]
 
 @app.route("/", methods=["GET"])
 def home():
@@ -64,5 +76,6 @@ def form():
 
     return render_template("form.html")
 
+# Cambiado para entorno de producción (Railway, Docker, etc.)
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
