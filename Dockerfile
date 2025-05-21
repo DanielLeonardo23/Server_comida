@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # Expón el puerto si usas Flask (por defecto es 5000)
 EXPOSE 5000
 
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "aplicación:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
