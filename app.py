@@ -1,16 +1,19 @@
 from flask import Flask, request, jsonify, render_template
-from werkzeug.utils import secure_filename
 import tensorflow as tf
 import numpy as np
 from PIL import Image
 import os
 
+# Inicializa la app Flask
 app = Flask(__name__)
 
+# Carga del modelo entrenado (asegúrate que exista en esta ruta)
 model = tf.keras.models.load_model("modelo_comidas.keras")
 
+# Tamaño de imagen esperado por el modelo
 IMG_SIZE = (224, 224)
 
+# Lista de clases para traducir el índice de predicción
 CLASS_NAMES = [
     'aguadito_de_pollo', 'arroz_chaufa_de_pollo', 'choclo_con_queso',
     'papa_a_la_huancaina', 'pollo_a_la_brasa_con_papas_fritas',
@@ -75,6 +78,5 @@ def form():
 
     return render_template("form.html")
 
-# Cambiado para entorno de producción (Railway, Docker, etc.)
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+# NOTA:
+# No incluyas app.run() aquí si usas Gunicorn en producción con Docker.
