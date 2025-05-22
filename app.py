@@ -4,12 +4,35 @@ import numpy as np
 import pandas as pd
 from PIL import Image
 import os
+from pathlib import Path  # ✅ ← ESTA ES LA QUE FALTABA
+app = Flask(__name__, template_folder="templates")
 
-# Inicializa la app Flask
-app = Flask(__name__)
 
-# Carga del modelo entrenado
-model = tf.keras.models.load_model("modelo_comidas.keras")
+# Ruta del modelo (puede ser .keras, .h5 o carpeta SavedModel)
+MODEL_PATH = "modelo_comidas.keras"  # Puedes cambiar esto si guardas en .h5 o carpeta
+
+# Función para cargar el modelo de forma flexible
+def cargar_modelo(ruta):
+    ruta_modelo = Path(ruta)
+    if not ruta_modelo.exists():
+        raise FileNotFoundError(f"❌ El modelo no existe: {ruta}")
+
+    try:
+        # Si es archivo .keras o .h5
+        model = tf.keras.models.load_model(ruta_modelo)
+        print(f"✅ Modelo cargado desde archivo: {ruta_modelo}")
+    except Exception as e:
+        # Si es una carpeta SavedModel
+        if ruta_modelo.is_dir():
+            model = tf.keras.models.load_model(str(ruta_modelo))
+            print(f"✅ Modelo cargado desde carpeta SavedModel: {ruta_modelo}")
+        else:
+            raise RuntimeError(f"❌ No se pudo cargar el modelo desde {ruta_modelo}\n{e}")
+    return model
+
+# Cargar modelo al iniciar
+model = cargar_modelo(MODEL_PATH)
+
 
 # Tamaño de imagen esperado
 IMG_SIZE = (224, 224)
