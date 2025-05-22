@@ -1,17 +1,18 @@
-# Imagen base con Python
+# Imagen base
 FROM python:3.10-slim
 
 # Directorio de trabajo
 WORKDIR /app
 
-# Copia el contenido del proyecto
+# Copia todo el contenido del proyecto al contenedor
 COPY . /app
 
-# Instala dependencias
+# Instalación de dependencias
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# Expón el puerto si usas Flask (por defecto es 5000)
+# Expón el puerto usado por Flask
 EXPOSE 5000
 
+# Comando para ejecutar la app con Gunicorn
 CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
