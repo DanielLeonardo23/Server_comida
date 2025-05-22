@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Subir Imagen de Comida</title>
-</head>
+<head><title>Clasificador de Comida Peruana</title></head>
 <body>
-  <h1>Clasificador de Comidas Peruanas</h1>
-  <form action="/form" method="post" enctype="multipart/form-data">
-    <label>Selecciona una imagen:</label><br><br>
-    <input type="file" name="image" accept="image/*"><br><br>
-    <input type="submit" value="Predecir">
+  <h2>🍽️ Sube una imagen de comida peruana</h2>
+  <form method="post" enctype="multipart/form-data">
+    <input type="file" name="image" accept="image/*" required>
+    <button type="submit">Clasificar</button>
   </form>
 </body>
 </html>

@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Resultado</title>
-</head>
+<head><title>Resultado</title></head>
 <body>
-  <h2>✅ Predicción:</h2>
-  <p><strong>{{ pred }}</strong></p>
-  <p>📊 Confianza: {{ conf }}%</p>
-  <a href="/form">Volver</a>
+  <h2>🔝 Top 5 Predicciones</h2>
+  <ul>
+    {% for r in resultados %}
+      <li>
+        <strong>{{ r.class }}</strong> — {{ r.confidence }}<br>
+        {% if r.nutrition %}
+          <ul>
+            {% for k, v in r.nutrition.items() %}
+              <li><strong>{{ k.replace('_', ' ').title() }}:</strong> {{ v }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <em>No hay datos nutricionales disponibles.</em>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
 </body>
 </html>

@@ -2,32 +2,28 @@ from flask import Flask, request, jsonify, render_template
 import tensorflow as tf
 import numpy as np
 from PIL import Image
+import pandas as pd
 import os
 
-# Inicializa la app Flask
 app = Flask(__name__)
 
-# Carga del modelo entrenado (asegúrate que exista en esta ruta)
+# Carga modelo
 model = tf.keras.models.load_model("modelo_comidas.keras")
 
-# Tamaño de imagen esperado por el modelo
+# Tamaño esperado por el modelo
 IMG_SIZE = (224, 224)
 
-# Lista de clases para traducir el índice de predicción
-CLASS_NAMES = [
-    'aguadito_de_pollo', 'arroz_chaufa_de_pollo', 'choclo_con_queso',
-    'papa_a_la_huancaina', 'pollo_a_la_brasa_con_papas_fritas',
-    'pollo_broaster_con_papas_fritas', 'tallarines_rojos_con_pollo',
-    'tallarines_saltados_con_pollo', 'tallarines_verdes_con_bistec',
-    'aji_de_gallina_peruano', 'anticuchos_peruanos',
-    'arroz_con_pollo_peruano', 'carapulcra', 'causa_limena',
-    'ceviche_peruano', 'juane', 'lomo_saltado_peruano', 'pachamanca',
-    'sopa_seca_chinchana'
-]
+# Ruta al CSV con nombres de clases y datos nutricionales
+CSV_PATH = os.path.join("data", "data.csv")
+
+# Carga clases desde CSV
+df = pd.read_csv(CSV_PATH)
+df.columns = [col.strip() for col in df.columns]
+class_names = df["CATEGORIA_ESTANDAR"].tolist()
 
 @app.route("/", methods=["GET"])
 def home():
-    return "API de clasificación de comida peruana"
+    return "✅ API Clasificador de Comidas Peruanas"
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -38,19 +34,33 @@ def predict():
     img = Image.open(img_file).convert("RGB")
     img = img.resize(IMG_SIZE)
 
+    # Preprocesamiento
     img_array = tf.keras.preprocessing.image.img_to_array(img)
     img_array = tf.keras.applications.efficientnet_v2.preprocess_input(img_array)
     img_batch = np.expand_dims(img_array, axis=0)
 
-    prediction = model.predict(img_batch)
-    predicted_index = np.argmax(prediction)
-    confidence = float(prediction[0][predicted_index])
-    predicted_class = CLASS_NAMES[predicted_index].replace("_", " ").title()
+    # Predicción
+    prediction = model.predict(img_batch)[0]
+    top_5_indices = prediction.argsort()[-5:][::-1]
 
-    return jsonify({
-        "predicted_class": predicted_class,
-        "confidence": confidence
-    })
+    results = []
+    for i in top_5_indices:
+        class_id = class_names[i]
+        confianza = float(prediction[i])
+        resultados_csv = df[df["CATEGORIA_ESTANDAR"].str.lower() == class_id.lower()]
+
+        nutricion = {}
+        if not resultados_csv.empty:
+            row = resultados_csv.iloc[0].drop(["CATEGORIA_ESTANDAR", "NOMBRE DE LAS PREPARACIONES"])
+            nutricion = row.to_dict()
+
+        results.append({
+            "class": class_id.replace("_", " ").title(),
+            "confidence": f"{confianza * 100:.2f}%",
+            "nutrition": nutricion
+        })
+
+    return jsonify(results)
 
 @app.route("/form", methods=["GET", "POST"])
 def form():
@@ -69,14 +79,26 @@ def form():
         img_array = tf.keras.applications.efficientnet_v2.preprocess_input(img_array)
         img_batch = np.expand_dims(img_array, axis=0)
 
-        prediction = model.predict(img_batch)
-        predicted_index = np.argmax(prediction)
-        confidence = float(prediction[0][predicted_index])
-        predicted_class = CLASS_NAMES[predicted_index].replace("_", " ").title()
+        prediction = model.predict(img_batch)[0]
+        top_5_indices = prediction.argsort()[-5:][::-1]
 
-        return render_template("result.html", pred=predicted_class, conf=f"{confidence*100:.2f}")
+        top_predictions = []
+        for i in top_5_indices:
+            class_id = class_names[i]
+            confianza = float(prediction[i])
+            resultados_csv = df[df["CATEGORIA_ESTANDAR"].str.lower() == class_id.lower()]
+
+            nutricion = {}
+            if not resultados_csv.empty:
+                row = resultados_csv.iloc[0].drop(["CATEGORIA_ESTANDAR", "NOMBRE DE LAS PREPARACIONES"])
+                nutricion = row.to_dict()
+
+            top_predictions.append({
+                "class": class_id.replace("_", " ").title(),
+                "confidence": f"{confianza * 100:.2f}%",
+                "nutrition": nutricion
+            })
+
+        return render_template("result.html", resultados=top_predictions)
 
     return render_template("form.html")
-
-# NOTA:
-# No incluyas app.run() aquí si usas Gunicorn en producción con Docker.
