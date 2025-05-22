@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html>
-<head><title>Clasificador de Comida Peruana</title></head>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clasificador de Comidas Peruanas</title>
+</head>
 <body>
-  <h2>🍽️ Sube una imagen de comida peruana</h2>
-  <form method="post" enctype="multipart/form-data">
-    <input type="file" name="image" accept="image/*" required>
-    <button type="submit">Clasificar</button>
-  </form>
+    <h1>🍽️ Clasificador de Comidas Peruanas</h1>
+    <p>Sube una imagen de un plato y te mostraré las 5 mejores predicciones con su información nutricional.</p>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Enviar</button>
+    </form>
 </body>
 </html>

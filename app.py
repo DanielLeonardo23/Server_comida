@@ -259,3 +259,4 @@ def form():
         return render_template("result.html", results=resultados)
 
     return render_template("form.html")
+
