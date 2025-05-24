@@ -5,17 +5,20 @@
     <title>Resultados de la Predicción</title>
 </head>
 <body>
-    <h1>🔍 Top 5 Predicciones</h1>
+    <h1>✅ Resultados de la Predicción</h1>
 
-    {% for item in results %}
+    <h2>📂 Categoría General Detectada: {{ result.categoria_general }}</h2>
+
+    <h3>🔝 Top 5 Platos Detectados:</h3>
+    {% for item in result.top5_platos %}
         <div style="margin-bottom: 30px; border-bottom: 1px solid #ccc;">
-            <h2>{{ loop.index }}. {{ item.class }}</h2>
-            <p><strong>Confianza:</strong> {{ item.confidence }}%</p>
+            <h4>{{ loop.index }}. {{ item.plato }}</h4>
+            <p><strong>Confianza:</strong> {{ item.confianza * 100 }}%</p>
 
-            <h3>🍎 Información Nutricional:</h3>
-            {% if item.nutrition %}
+            <h5>🍎 Información Nutricional:</h5>
+            {% if item.nutricion != 'No disponible' %}
                 <ul>
-                {% for k, v in item.nutrition.items() %}
+                {% for k, v in item.nutricion.items() %}
                     <li><strong>{{ k.replace('_', ' ').title() }}:</strong> {{ v }}</li>
                 {% endfor %}
                 </ul>
