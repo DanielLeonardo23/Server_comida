@@ -28,4 +28,5 @@ RUN pip install --no-cache-dir --upgrade pip && \
 EXPOSE 5000
 
 # Comando para ejecutar
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
+CMD exec gunicorn -b :$PORT app:app
+
