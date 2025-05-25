@@ -11,7 +11,7 @@ app = Flask(__name__, template_folder="templates")
 
 # Configuración
 MODEL_PATH = "modelo_comidas.keras"
-CSV_PATH = "data_con_categorias.csv"
+CSV_PATH = "data.csv"
 IMG_SIZE = (224, 224)
 
 # Cargar modelo general
@@ -25,11 +25,12 @@ def cargar_modelo(ruta):
 
 model_general = cargar_modelo(MODEL_PATH)
 
-# Leer CSV completo
+# Leer CSV completo (para nutrición)
 df_datos = pd.read_csv(CSV_PATH)
 
-# Obtener lista única de categorías generales
-CATEGORIAS_GENERALES = df_datos['categoria_general'].unique().tolist()
+# Leer categorías generales desde JSON
+with open('general_classes.json', 'r') as f:
+    CATEGORIAS_GENERALES = json.load(f)
 
 # Preprocesar imagen
 def preparar_imagen(img_file):
@@ -130,3 +131,6 @@ def form():
         return render_template("result.html", result=resultado)
 
     return render_template("form.html")
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
