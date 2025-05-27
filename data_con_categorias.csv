@@ -6,12 +6,13 @@ adobo_de_pollo_con_ensalada_y_,Adobo de pollo con ensalada y arroz,34.0,145.0,2.
 adobo_de_pollo_y_arroz,Adobo de pollo y arroz,43.05,138.5,1.75,7.35,adobo
 adobo_de_res_con_arroz_y_pure,Adobo de res con arroz y puré,50.9,126.0,1.8,5.6,adobo
 adobo_de_res_con_menestra_y_ar,Adobo de res con menestra y arroz,19.3,155.0,1.7,7.7,adobo
-aeropuerto_de_pollo,Aeropuerto de pollo,28.7,212.0,2.5,6.5,aeropuerto
-aeropuerto_tacon_pa,Aeropuerto tacon pa,19.3,177.0,3.4,7.6,aeropuerto
+aeropuerto_de_pollo,Aeropuerto de pollo,28.7,212.0,2.5,6.5,arroz
+aeropuerto_tacon_pa,Aeropuerto tacon pa,19.3,177.0,3.4,7.6,arroz
 aji_de_pollo_y_arroz,Ají de pollo y arroz,35.8,150.6,3.06,5.52,aji
 albondigas_en_salsa_y_arroz,Albóndigas en salsa y arroz,37.4,133.0,3.6,6.3,albondigas
 alita_broaster_con_papas_frita,Alita broaster con papas fritas y arroz,35.7,272.0,18.7,5.7,alita
 anticucho_con_papa_y_arroz,Anticucho con papa y arroz,73.75,111.5,3.25,9.55,anticucho
+Aguadito,Aguadito,88.0,160.0,5.0,14.0,Aguadito
 arroz_a_la_jardinera_con_pollo,Arroz a la jardinera con pollo,39.3,133.67,1.73,7.1,arroz
 arroz_a_la_jardinera_con_pollo,Arroz a la jardinera con pollo frito,32.7,165.0,3.9,4.3,arroz
 arroz_arabe_con_pollo,Arroz arabe con pollo,59.6,135.0,1.25,5.75,arroz
@@ -187,6 +188,7 @@ higado_frito_con_arroz,Hígado frito con arroz,37.0,174.0,5.1,5.4,higado
 huevitos_en_salsa_golf,Huevitos en salsa golf,74.3,129.5,9.05,1.7,huevitos
 huevo_a_la_rusa,Huevo a la rusa,63.93,94.33,4.6,3.57,huevo
 hummus,Hummus,7.8,212.0,3.9,7.0,hummus
+Humitas,Humitas7.8,212.0,3.9,7.0,,Humitas
 jalea_con_yuca_frita,Jalea con yuca frita,34.5,210.0,13.3,10.4,jalea
 jalea_de_pescado_con_arroz,Jalea de pescado con arroz,37.55,108.5,2.8,4.95,jalea
 jalea_de_pescado_con_yuca_frit,Jalea de pescado con yuca frita,37.05,189.5,9.55,6.8,jalea
@@ -218,6 +220,7 @@ menestron_con_pollo,Menestrón con pollo,25.4,85.0,1.25,4.25,menestron
 menestron_con_res,Menestrón con res,21.88,45.0,0.38,2.26,menestron
 milanesa_con_arroz,Milanesa con arroz,47.4,175.0,7.3,5.4,milanesa
 ocopa_a_la_arequipena,Ocopa a la arequipeña,67.26,125.4,4.64,3.82,ocopa
+Olluquito,Olluquito,33.0,150.0,6.0,5.0,Olluquito
 palta_rellena,Palta rellena,72.13,137.67,9.53,3.33,palta
 pan_al_ajo,Pan al ajo,48.97,226.33,14.13,3.4,pan
 papa_a_la_huancaina,Papa a la huancaína,68.34,118.4,3.9,3.52,papa
@@ -233,8 +236,6 @@ pasta_otros,Pasta otros,41.6,119.0,3.0,8.6,pasta
 pastel_de_papa,Pastel de papa,70.4,138.0,6.1,6.2,pastel
 patasca,Patasca,14.63,74.25,2.6,3.8,patasca
 patita_con_mani_y_arroz,Patita con maní y arroz,38.3,134.0,1.7,4.1,patita
-pechuga_a_la_parrilla_+_1_chor,"Pechuga a la parrilla + 1 chorizo + 1 anticucho de corazón de pollo
-+ papas fritas",65.2,198.0,12.8,9.2,pechuga
 pechuga_a_la_plancha_con_ensal,Pechuga a la plancha con ensalada y arroz,56.2,132.0,3.7,6.7,pechuga
 pejerrey_arrebosado,Pejerrey arrebosado,66.5,172.0,9.3,6.9,pejerrey
 pescado_a_la_chorrillana_con_a,Pescado a la chorrillana con arroz,35.1,224.0,12.3,5.4,pescado
@@ -308,6 +309,7 @@ pollo_frito_con_papas_fritas_y,Pollo frito con papas fritas y arroz,41.37,189.0,
 pollo_frito_con_papas_fritas_e,"Pollo frito con papas fritas, ensalada y arroz",47.2,165.0,6.6,5.5,pollo
 pollo_frito_con_pure_y_arroz,Pollo frito con puré y arroz,43.3,171.0,5.4,7.8,pollo
 pollo_saltado_con_arroz,Pollo saltado con arroz,47.5,183.0,9.6,5.5,pollo
+Pulpo al Olivo,Pulpo al Olivo,81.0,80.0,1.4,12.6,Pulpo al Olivo
 pure_con_asado_y_arroz,Puré con asado y arroz,46.58,129.75,3.15,5.78,pure
 pure_con_asado_y_arroz_integra,Puré con asado y arroz integral,48.1,156.0,3.3,4.9,pure
 pure_con_bisteck_y_arroz,Puré con bisteck y arroz,31.9,127.0,2.3,4.8,pure
