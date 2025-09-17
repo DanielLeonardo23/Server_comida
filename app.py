@@ -19,7 +19,7 @@ IMG_SIZE = (224, 224)
 def cargar_modelo(ruta):
     ruta_modelo = Path(ruta)
     if not ruta_modelo.exists():
-        raise FileNotFoundError(f"❌ El modelo no existe: {ruta}")
+        raise FileNotFoundError(f"El modelo no existe: {ruta}")
     model = tf.keras.models.load_model(ruta_modelo)
     return model
 
@@ -44,7 +44,7 @@ def preparar_imagen(img_file):
     try:
         img = Image.open(img_file).convert("RGB")
     except UnidentifiedImageError:
-        raise ValueError("❌ No se pudo leer la imagen. Sube un archivo válido (JPG, PNG, BMP, etc.).")
+        raise ValueError(" No se pudo leer la imagen. Sube un archivo válido (JPG, PNG, BMP, etc.).")
     img = img.resize(IMG_SIZE)
     img_array = tf.keras.preprocessing.image.img_to_array(img)
     img_array = tf.keras.applications.efficientnet_v2.preprocess_input(img_array)
